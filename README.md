@@ -63,3 +63,16 @@ A robust PS/2 to USB HID keyboard converter for the Raspberry Pi Pico (RP2040), 
 
 - **Log File**: Errors are written to `log.txt` on the device. Not cleared on startup unless `DEBUG = True` in `main.py`.
 - **Debug Mode**: Set `DEBUG = True` in `main.py` to log all events, not just errors. Clears on startup.
+
+## Some info about PS/2 protocol
+
+- [hungarian](http://www.vfx.hu/info/atkeyboard.html)
+- [english 1](https://www.avrfreaks.net/sites/default/files/PS2%20Keyboard.pdf)
+- [english 2](https://karooza.net/how-to-interface-a-ps2-keyboard)
+
+## Working keys
+
+All keys are read correctly from the PS/2 keyboard.
+Not working with HID right now: Left and Right GUI/Windows/Meta keys, ISO 105th key (next to left shift). This means these keys cannot be used for macro or USB HID input now.
+
+**I accept any help and suggestions.**
