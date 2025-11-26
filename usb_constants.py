@@ -3,85 +3,137 @@ from usb.device.keyboard import KeyCode
 class USB:
     """USB HID Usage IDs (Page 0x07)"""
     # Letters
-    A = KeyCode.A; B = KeyCode.B; C = KeyCode.C; D = KeyCode.D; E = KeyCode.E
-    F = KeyCode.F; G = KeyCode.G; H = KeyCode.H; I = KeyCode.I; J = KeyCode.J
-    K = KeyCode.K; L = KeyCode.L; M = KeyCode.M; N = KeyCode.N; O = KeyCode.O
-    P = KeyCode.P; Q = KeyCode.Q; R = KeyCode.R; S = KeyCode.S; T = KeyCode.T
-    U = KeyCode.U; V = KeyCode.V; W = KeyCode.W; X = KeyCode.X; Y = KeyCode.Y
-    Z = KeyCode.Z
+    A = getattr(KeyCode, 'A', 0x04)
+    B = getattr(KeyCode, 'B', 0x05)
+    C = getattr(KeyCode, 'C', 0x06)
+    D = getattr(KeyCode, 'D', 0x07)
+    E = getattr(KeyCode, 'E', 0x08)
+    F = getattr(KeyCode, 'F', 0x09)
+    G = getattr(KeyCode, 'G', 0x0A)
+    H = getattr(KeyCode, 'H', 0x0B)
+    I = getattr(KeyCode, 'I', 0x0C)
+    J = getattr(KeyCode, 'J', 0x0D)
+    K = getattr(KeyCode, 'K', 0x0E)
+    L = getattr(KeyCode, 'L', 0x0F)
+    M = getattr(KeyCode, 'M', 0x10)
+    N = getattr(KeyCode, 'N', 0x11)
+    O = getattr(KeyCode, 'O', 0x12)
+    P = getattr(KeyCode, 'P', 0x13)
+    Q = getattr(KeyCode, 'Q', 0x14)
+    R = getattr(KeyCode, 'R', 0x15)
+    S = getattr(KeyCode, 'S', 0x16)
+    T = getattr(KeyCode, 'T', 0x17)
+    U = getattr(KeyCode, 'U', 0x18)
+    V = getattr(KeyCode, 'V', 0x19)
+    W = getattr(KeyCode, 'W', 0x1A)
+    X = getattr(KeyCode, 'X', 0x1B)
+    Y = getattr(KeyCode, 'Y', 0x1C)
+    Z = getattr(KeyCode, 'Z', 0x1D)
 
     # Numbers
-    N1 = KeyCode.N1; N2 = KeyCode.N2; N3 = KeyCode.N3; N4 = KeyCode.N4; N5 = KeyCode.N5
-    N6 = KeyCode.N6; N7 = KeyCode.N7; N8 = KeyCode.N8; N9 = KeyCode.N9; N0 = KeyCode.N0
+    N1 = getattr(KeyCode, 'N1', 0x1E)
+    N2 = getattr(KeyCode, 'N2', 0x1F)
+    N3 = getattr(KeyCode, 'N3', 0x20)
+    N4 = getattr(KeyCode, 'N4', 0x21)
+    N5 = getattr(KeyCode, 'N5', 0x22)
+    N6 = getattr(KeyCode, 'N6', 0x23)
+    N7 = getattr(KeyCode, 'N7', 0x24)
+    N8 = getattr(KeyCode, 'N8', 0x25)
+    N9 = getattr(KeyCode, 'N9', 0x26)
+    N0 = getattr(KeyCode, 'N0', 0x27)
 
     # Function Keys
-    F1 = KeyCode.F1; F2 = KeyCode.F2; F3 = KeyCode.F3; F4 = KeyCode.F4; F5 = KeyCode.F5
-    F6 = KeyCode.F6; F7 = KeyCode.F7; F8 = KeyCode.F8; F9 = KeyCode.F9; F10 = KeyCode.F10
-    F11 = KeyCode.F11; F12 = KeyCode.F12
+    F1 = getattr(KeyCode, 'F1', 0x3A)
+    F2 = getattr(KeyCode, 'F2', 0x3B)
+    F3 = getattr(KeyCode, 'F3', 0x3C)
+    F4 = getattr(KeyCode, 'F4', 0x3D)
+    F5 = getattr(KeyCode, 'F5', 0x3E)
+    F6 = getattr(KeyCode, 'F6', 0x3F)
+    F7 = getattr(KeyCode, 'F7', 0x40)
+    F8 = getattr(KeyCode, 'F8', 0x41)
+    F9 = getattr(KeyCode, 'F9', 0x42)
+    F10 = getattr(KeyCode, 'F10', 0x43)
+    F11 = getattr(KeyCode, 'F11', 0x44)
+    F12 = getattr(KeyCode, 'F12', 0x45)
+    
+    # Extended Function Keys
+    F13 = getattr(KeyCode, 'F13', 0x68)
+    F14 = getattr(KeyCode, 'F14', 0x69)
+    F15 = getattr(KeyCode, 'F15', 0x6A)
+    F16 = getattr(KeyCode, 'F16', 0x6B)
+    F17 = getattr(KeyCode, 'F17', 0x6C)
+    F18 = getattr(KeyCode, 'F18', 0x6D)
+    F19 = getattr(KeyCode, 'F19', 0x6E)
+    F20 = getattr(KeyCode, 'F20', 0x6F)
+    F21 = getattr(KeyCode, 'F21', 0x70)
+    F22 = getattr(KeyCode, 'F22', 0x71)
+    F23 = getattr(KeyCode, 'F23', 0x72)
+    F24 = getattr(KeyCode, 'F24', 0x73)
 
     # Modifiers
-    L_CTRL   = KeyCode.LEFT_CTRL
-    L_SHIFT  = KeyCode.LEFT_SHIFT
-    L_ALT    = KeyCode.LEFT_ALT
-    L_GUI    = getattr(KeyCode, 'LEFT_GUI', getattr(KeyCode, 'GUI', getattr(KeyCode, 'LEFT_META', 0xE3)))
-    R_CTRL   = KeyCode.RIGHT_CTRL
-    R_SHIFT  = KeyCode.RIGHT_SHIFT
-    R_ALT    = KeyCode.RIGHT_ALT
-    R_GUI    = getattr(KeyCode, 'RIGHT_GUI', getattr(KeyCode, 'RIGHT_META', 0xE7))
+    L_CTRL = getattr(KeyCode, 'LEFT_CTRL', 0xE0)
+    L_SHIFT = getattr(KeyCode, 'LEFT_SHIFT', 0xE1)
+    L_ALT = getattr(KeyCode, 'LEFT_ALT', 0xE2)
+    L_GUI = getattr(KeyCode, 'LEFT_UI', getattr(KeyCode, 'LEFT_GUI', 0xE3))
+    R_CTRL = getattr(KeyCode, 'RIGHT_CTRL', 0xE4)
+    R_SHIFT = getattr(KeyCode, 'RIGHT_SHIFT', 0xE5)
+    R_ALT = getattr(KeyCode, 'RIGHT_ALT', 0xE6)
+    R_GUI = getattr(KeyCode, 'RIGHT_UI', getattr(KeyCode, 'RIGHT_GUI', 0xE7))
 
     # Common Keys
-    ENTER    = KeyCode.ENTER
-    ESC      = KeyCode.ESCAPE
-    BACKSPACE= KeyCode.BACKSPACE
-    TAB      = KeyCode.TAB
-    SPACE    = KeyCode.SPACE
-    MINUS    = KeyCode.MINUS
-    EQUAL    = KeyCode.EQUAL
-    L_BRACKET= KeyCode.OPEN_BRACKET
-    R_BRACKET= KeyCode.CLOSE_BRACKET
-    BACKSLASH= KeyCode.BACKSLASH
-    SEMICOLON= KeyCode.SEMICOLON
-    QUOTE    = KeyCode.QUOTE
-    GRAVE    = KeyCode.GRAVE
-    COMMA    = KeyCode.COMMA
-    DOT      = KeyCode.DOT
-    SLASH    = KeyCode.SLASH
-    CAPS_LOCK= KeyCode.CAPS_LOCK
+    ENTER = getattr(KeyCode, 'ENTER', 0x28)
+    ESC = getattr(KeyCode, 'ESCAPE', 0x29)
+    BACKSPACE = getattr(KeyCode, 'BACKSPACE', 0x2A)
+    TAB = getattr(KeyCode, 'TAB', 0x2B)
+    SPACE = getattr(KeyCode, 'SPACE', 0x2C)
+    MINUS = getattr(KeyCode, 'MINUS', 0x2D)
+    EQUAL = getattr(KeyCode, 'EQUAL', 0x2E)
+    L_BRACKET = getattr(KeyCode, 'OPEN_BRACKET', 0x2F)
+    R_BRACKET = getattr(KeyCode, 'CLOSE_BRACKET', 0x30)
+    BACKSLASH = getattr(KeyCode, 'BACKSLASH', 0x31)
+    SEMICOLON = getattr(KeyCode, 'SEMICOLON', 0x33)
+    QUOTE = getattr(KeyCode, 'QUOTE', 0x34)
+    GRAVE = getattr(KeyCode, 'GRAVE', 0x35)
+    COMMA = getattr(KeyCode, 'COMMA', 0x36)
+    DOT = getattr(KeyCode, 'DOT', 0x37)
+    SLASH = getattr(KeyCode, 'SLASH', 0x38)
+    CAPS_LOCK = getattr(KeyCode, 'CAPS_LOCK', 0x39)
 
     # Navigation
-    PRINTSCR = getattr(KeyCode, 'PRINT_SCREEN', 0x46)
-    SCROLL_LOCK= getattr(KeyCode, 'SCROLL_LOCK', 0x47)
-    PAUSE    = getattr(KeyCode, 'PAUSE', 0x48)
-    INSERT   = getattr(KeyCode, 'INSERT', 0x49)
-    HOME     = getattr(KeyCode, 'HOME', 0x4A)
-    PGUP     = getattr(KeyCode, 'PAGE_UP', 0x4B)
-    DELETE   = getattr(KeyCode, 'DELETE', 0x4C)
-    END      = getattr(KeyCode, 'END', 0x4D)
-    PGDN     = getattr(KeyCode, 'PAGE_DOWN', 0x4E)
-    RIGHT    = getattr(KeyCode, 'RIGHT', 0x4F)
-    LEFT     = getattr(KeyCode, 'LEFT', 0x50)
-    DOWN     = getattr(KeyCode, 'DOWN', 0x51)
-    UP       = getattr(KeyCode, 'UP', 0x52)
+    PRINTSCR = getattr(KeyCode, 'PRINTSCREEN', getattr(KeyCode, 'PRINT_SCREEN', 0x46))
+    SCROLL_LOCK = getattr(KeyCode, 'SCROLL_LOCK', 0x47)
+    PAUSE = getattr(KeyCode, 'PAUSE', 0x48)
+    INSERT = getattr(KeyCode, 'INSERT', 0x49)
+    HOME = getattr(KeyCode, 'HOME', 0x4A)
+    PGUP = getattr(KeyCode, 'PAGEUP', getattr(KeyCode, 'PAGE_UP', 0x4B))
+    DELETE = getattr(KeyCode, 'DELETE', 0x4C)
+    END = getattr(KeyCode, 'END', 0x4D)
+    PGDN = getattr(KeyCode, 'PAGEDOWN', getattr(KeyCode, 'PAGE_DOWN', 0x4E))
+    RIGHT = getattr(KeyCode, 'RIGHT', 0x4F)
+    LEFT = getattr(KeyCode, 'LEFT', 0x50)
+    DOWN = getattr(KeyCode, 'DOWN', 0x51)
+    UP = getattr(KeyCode, 'UP', 0x52)
 
     # Numpad
-    NUM_LOCK = getattr(KeyCode, 'NUM_LOCK', 0x53)
+    NUM_LOCK = getattr(KeyCode, 'KP_NUM_LOCK', getattr(KeyCode, 'NUM_LOCK', 0x53))
     KP_SLASH = getattr(KeyCode, 'KP_DIVIDE', 0x54)
-    KP_STAR  = getattr(KeyCode, 'KP_MULTIPLY', 0x55)
+    KP_STAR = getattr(KeyCode, 'KP_MULTIPLY', 0x55)
     KP_MINUS = getattr(KeyCode, 'KP_MINUS', 0x56)
-    KP_PLUS  = getattr(KeyCode, 'KP_PLUS', 0x57)
+    KP_PLUS = getattr(KeyCode, 'KP_PLUS', 0x57)
     KP_ENTER = getattr(KeyCode, 'KP_ENTER', 0x58)
-    KP_1     = getattr(KeyCode, 'KP_1', 0x59)
-    KP_2     = getattr(KeyCode, 'KP_2', 0x5A)
-    KP_3     = getattr(KeyCode, 'KP_3', 0x5B)
-    KP_4     = getattr(KeyCode, 'KP_4', 0x5C)
-    KP_5     = getattr(KeyCode, 'KP_5', 0x5D)
-    KP_6     = getattr(KeyCode, 'KP_6', 0x5E)
-    KP_7     = getattr(KeyCode, 'KP_7', 0x5F)
-    KP_8     = getattr(KeyCode, 'KP_8', 0x60)
-    KP_9     = getattr(KeyCode, 'KP_9', 0x61)
-    KP_0     = getattr(KeyCode, 'KP_0', 0x62)
-    KP_DOT   = getattr(KeyCode, 'KP_PERIOD', 0x63)
+    KP_1 = getattr(KeyCode, 'KP_1', 0x59)
+    KP_2 = getattr(KeyCode, 'KP_2', 0x5A)
+    KP_3 = getattr(KeyCode, 'KP_3', 0x5B)
+    KP_4 = getattr(KeyCode, 'KP_4', 0x5C)
+    KP_5 = getattr(KeyCode, 'KP_5', 0x5D)
+    KP_6 = getattr(KeyCode, 'KP_6', 0x5E)
+    KP_7 = getattr(KeyCode, 'KP_7', 0x5F)
+    KP_8 = getattr(KeyCode, 'KP_8', 0x60)
+    KP_9 = getattr(KeyCode, 'KP_9', 0x61)
+    KP_0 = getattr(KeyCode, 'KP_0', 0x62)
+    KP_DOT = getattr(KeyCode, 'KP_PERIOD', getattr(KeyCode, 'KP_DOT', 0x63))
 
     # Misc
-    APP      = getattr(KeyCode, 'APPLICATION', 0x65)
-    ISO_SLASH= 0x64
+    APP = getattr(KeyCode, 'APPLICATION', 0x65)
+    ISO_SLASH = getattr(KeyCode, 'NON_US_BACKSLASH', getattr(KeyCode, 'ISO_BACKSLASH', 0x64))
+    ISO_HASH = getattr(KeyCode, 'HASH', getattr(KeyCode, 'NON_US_HASH', 0x32))

@@ -12,12 +12,14 @@ def K(code): return KeyAction(code, toggle=False)
 def T(code): return KeyAction(code, toggle=True)
 def M(*codes): return KeyAction(list(codes), toggle=False)
 
-# Example for macro (A -> CTRL+ALT+T):
-#   PS2.A: M(USB.L_CTRL, USB.L_ALT, USB.T)
+# Example for macro (A -> CTRL+ALT+T (open terminal)):
+#   PS2.T: M(USB.L_CTRL, USB.L_ALT, USB.T)
+#
+# USB F13-F24 are a work in progress.
 
 KEY_MAP = {
     # Letters
-    PS2.A: M(USB.L_CTRL, USB.L_ALT, USB.T),
+    PS2.A: K(USB.A),
     PS2.B: K(USB.B),
     PS2.C: K(USB.C),
     PS2.D: K(USB.D),
