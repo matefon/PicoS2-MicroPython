@@ -213,8 +213,8 @@ async def main():
         raise e
 
 if __name__ == "__main__":
-    log("Waiting 2 seconds before starting USB... Press Ctrl+C to stop.")
-    time.sleep(2)
+    log("Waiting 1 second before starting USB... Press Ctrl+C to stop.")
+    time.sleep(1)
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
