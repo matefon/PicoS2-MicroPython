@@ -10,6 +10,9 @@ import time
 import sys
 import neopixel
 
+# --- DEBUG LOGGING ---
+DEBUG = False
+
 # --- STATUS LED CONTROLLER ---
 class StatusController:
     def __init__(self):
@@ -65,9 +68,6 @@ class StatusController:
                 await asyncio.sleep(1)
 
 STATUS = StatusController()
-
-# --- DEBUG LOGGING ---
-DEBUG = False
 
 def log(msg, error=False):
     print(msg)
