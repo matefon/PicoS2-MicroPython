@@ -73,7 +73,9 @@ A robust PS/2 to USB HID keyboard converter for the Raspberry Pi Pico (RP2040), 
 
 All keys are read correctly from the PS/2 keyboard.
 
-Not working with HID right now: F13-F24 extended function keys. These are great for macro use in apps that support them, as they cannot be accessed from most keyboards.
+Not working with HID right now: F13-F24 extended function keys. These are great for macro use in apps that support them, as they cannot be accessed from most keyboards. 
+
+Note: this is a MicroPython HID limitation. In `micropython-lib/micropython/usb/usb-device-keyboard/usb/device/keyboard.py` the `_KEYBOARD_REPORT_DESC` is using `logical` and `usage maximum` of `101`. A value of `115` (`x73`) is needed for extended function keys to work.
 
 **I accept any help and suggestions.**
 
