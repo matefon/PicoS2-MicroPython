@@ -67,8 +67,7 @@ A robust PS/2 to USB HID keyboard converter for the Raspberry Pi Pico (RP2040), 
 ## Some info about PS/2 protocol
 
 - [hungarian](http://www.vfx.hu/info/atkeyboard.html)
-- [english 1](https://www.avrfreaks.net/sites/default/files/PS2%20Keyboard.pdf)
-- [english 2](https://karooza.net/how-to-interface-a-ps2-keyboard)
+- [english](https://karooza.net/how-to-interface-a-ps2-keyboard)
 
 ## Working keys
 
