@@ -101,12 +101,25 @@ from keymap import KEY_MAP
 
 # --- LOGIC ---
 
+LED_QUEUE = []
+
 class PS2ToUSB(KeyboardInterface):
     def __init__(self):
         super().__init__()
         self.pressed_keys = set()
         self.last_sent_keys = []
         self.error_state = False
+
+    def on_led_update(self, leds):
+        # leds is a bitmask: 1=Num, 2=Caps, 4=Scroll
+        # PS/2 LED Byte: Bit 0=Scroll, Bit 1=Num, Bit 2=Caps
+        ps2_leds = 0
+        if leds & 1: ps2_leds |= 2 # Num
+        if leds & 2: ps2_leds |= 4 # Caps
+        if leds & 4: ps2_leds |= 1 # Scroll
+        
+        # Queue the update
+        LED_QUEUE.append(ps2_leds)
 
     def update_key(self, action, pressed):
         if action is None: return
@@ -168,7 +181,12 @@ async def main():
         STATUS.set_state("READY")
         
         def ps2_callback(scancode, pressed, extended):
-            # print(f"PS2: {hex(scancode)} {pressed}")
+            # Ignore ACKs (0xFA) from commands
+            if scancode == 0xFA:
+                return
+
+            log(f"PS2: {hex(scancode)} {pressed}")
+
             key_tuple = (scancode, extended)
             
             # Debug Windows Keys specifically
@@ -190,6 +208,28 @@ async def main():
         ps2_kb = PS2Keyboard(clk_pin=PS2_CLK_PIN, data_pin=PS2_DATA_PIN, callback=ps2_callback)
         ps2_task = asyncio.create_task(ps2_kb.read_loop())
         
+        # --- LED TEST ---
+        log("Testing LEDs...")
+        try:
+            # Reset keyboard to known state
+            log("Sending RESET...")
+            await ps2_kb.cmd_reset()
+            await asyncio.sleep(0.5) # Wait for BAT (Basic Assurance Test) completion
+            
+            # Enable
+            log("Sending ENABLE...")
+            await ps2_kb.cmd_enable()
+            await asyncio.sleep(0.1)
+            
+            log("Flashing LEDs...")
+            await ps2_kb.cmd_set_leds(0x07) # All ON
+            await asyncio.sleep(0.5)
+            await ps2_kb.cmd_set_leds(0x00) # All OFF
+            log("LED Test Done")
+        except Exception as e:
+            log(f"LED Test Failed: {e}", error=True)
+        # ----------------
+        
         log("Main loop running")
         while True:
             if ps2_task.done():
@@ -199,7 +239,17 @@ async def main():
                     if exc: log(f"PS/2 Crash: {exc}", error=True)
                 except: pass
                 ps2_task = asyncio.create_task(ps2_kb.read_loop())
-            await asyncio.sleep(1)
+                
+            # Process LED Queue
+            if LED_QUEUE:
+                led_byte = LED_QUEUE.pop(0)
+                try:
+                    # Use the new async command method which handles ACK
+                    await ps2_kb.cmd_set_leds(led_byte)
+                except Exception as e:
+                    log(f"LED Update Error: {e}", error=True)
+                    
+            await asyncio.sleep(0.01) # Reduced sleep for responsiveness
             
     except Exception as e:
         log(f"Main Error: {e}", error=True)
