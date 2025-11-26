@@ -77,7 +77,7 @@ A robust PS/2 to USB HID keyboard converter for the Raspberry Pi Pico (RP2040), 
 
 ## Working keys
 
-All keys are read correctly from the PS/2 keyboard.
+All keys are read correctly from the PS/2 keyboard. Even Pause/Break (it is special though: it doesn't have a release code so a press is a press-release and a release is unnoticed).
 
 Not working with HID right now (out of the box): F13-F24 extended function keys. These are great for macro use in apps that support them, as they cannot be accessed (and be pressed) from most keyboards. 
 
@@ -93,7 +93,7 @@ How to fix:
 - *Optional* Save original `keyboard.mpy`: `mpremote cp :lib/usb/device/keyboard.mpy original_keyboard.mpy` (you can revert by re-installing the library, see above)
 - Copy the patched `keyboard.mpy`: `mpremote cp keyboard.mpy :lib/usb/device/keyboard.mpy`
 - Reboot the Pico.
-- Test the extended function keys (remember to change some key definitions first then reboot the Pico): `pipx install hid-tools` then run `hid-recorder`
+- Test the extended function keys (remember to change some key definitions first then reboot the Pico): `pipx install hid-tools` then run `hid-recorder` and select `MicroPython Board in FS mode`
 
 Note: precompiled patched `keyboard.mpy` is available in the repo `lib` folder.
 
