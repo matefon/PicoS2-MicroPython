@@ -55,7 +55,7 @@ class StatusController:
                         
                 elif self.state == "READY":
                     # Solid Green (Dim), Flash Bright on Activity
-                    if time.ticks_diff(time.ticks_ms(), self.last_act) < 150:
+                    if time.ticks_diff(time.ticks_ms(), self.last_act) < 100:
                         self.np[0] = (0, 50, 0) # Brighter Green
                     else:
                         self.np[0] = (0, 5, 0)   # Dim Green
