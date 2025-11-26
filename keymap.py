@@ -15,7 +15,7 @@ def M(*codes): return KeyAction(list(codes), toggle=False)
 # Example for macro (A -> CTRL+ALT+T (open terminal)):
 #   PS2.T: M(USB.L_CTRL, USB.L_ALT, USB.T)
 #
-# USB F13-F24 are a work in progress.
+# To use USB F13-F24 see README.
 
 KEY_MAP = {
     # Letters
