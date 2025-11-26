@@ -90,7 +90,7 @@ How to fix:
 - Install `mpy-cross` and `mpremote` with `pip` or `pipx`: `pipx install mpy-cross mpremote`
 - *Optional, recommended*: Download latest `keyboard.py` from `https://github.com/micropython/micropython-lib/blob/master/micropython/usb/usb-device-keyboard/usb/device/keyboard.py` and copy this into the repo `lib` folder
 - Run this in the repo `lib` folder: `mpy-cross keyboard.py`
-- *Optional* Save original `keyboard.mpy`: `mpremote cp :lib/usb/device/keyboard.mpy original_keyboard.mpy` (you can revert by re-installing the library, see above)
+- *Optional*: Save original `keyboard.mpy`: `mpremote cp :lib/usb/device/keyboard.mpy original_keyboard.mpy` (you can revert by re-installing the library, see above)
 - Copy the patched `keyboard.mpy`: `mpremote cp keyboard.mpy :lib/usb/device/keyboard.mpy`
 - Reboot the Pico.
 - Test the extended function keys (remember to change some key definitions first then reboot the Pico): `pipx install hid-tools` then run `hid-recorder` and select `MicroPython Board in FS mode`
