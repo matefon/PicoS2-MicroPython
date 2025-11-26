@@ -51,7 +51,7 @@ A robust PS/2 to USB HID keyboard converter for the Raspberry Pi Pico (RP2040), 
    - `usb_constants.py`
    - `simple_test.py` (needed only if testing the PS/2 wiring)
 4. *Change key definitions (optional)*: User friendly key/macro system defined in `keymap.py`. Edit in Thonny for example (hit `Stop/Restart Backend` until you see the terminal in which you could type).
-5. **Run**: Reset the board. It will wait 2 seconds (flashing yellow) before starting.
+5. **Run**: Reset the board. It will wait 1 second (flashing yellow) before starting.
 
 
 
