@@ -15,7 +15,7 @@ A robust PS/2 to USB HID keyboard converter for the Raspberry Pi Pico (RP2040), 
 
 - **Board**: Raspberry Pi Pico or RP2040-Zero (Code configured for RP2040-Zero NeoPixel on GPIO 16).
 - **PS/2 Connector**: Female PS/2 socket or breakout.
-- **Level Shifting**: PS/2 is 5V, Pico is 3.3V. While the Pico inputs are often tolerant, a level shifter or voltage divider is recommended for safety.
+- **Level Shifting**: PS/2 is 5V, Pico is 3.3V. While my testing keyboard works with 3.3V, a level shifter or voltage divider could be necessary.
 
 ### Wiring (Default)
 
@@ -101,7 +101,15 @@ Note: on my KDE Ubuntu 25.10 system, extended function keys are interpreted diff
 
 e.g. `xmodmap -e "keycode 184 = F14"` (not tested) or use `xkb`/`xmodmap`.
 
+## Todo
 
+- Add SSD1306 support
+- Add onboard menu for changing keymap, macros and providing feedback
+- Add EC11 rotary encoder support (for onboard menu navigation)
+- Add Rubber ducky functionality, accessible from onboard menu and as macro definitions
+- Define keymap in JSON so it is more readable and can be changed from onboard menu
+- Add a button/switch to trigger HID only mode (no MicroPython) to increase compatibility
+- Add hardware (MOSFET/BJT) and software (is it possible with current PIO? Maybe 2 other control pins for transistors) to control the PS/2 keyboard onboard LEDs (CapsLock, NumLock, ScrollLock)
 
 **I accept any help and suggestions.**
 
