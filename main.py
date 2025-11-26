@@ -155,54 +155,62 @@ async def main():
     log("Starting PS/2 to USB HID Bridge...")
     asyncio.create_task(STATUS.run())
     
+    usb_kb = None
     try:
         usb_kb = PS2ToUSB()
         usb.device.get().init(usb_kb, builtin_driver=True)
-    except Exception as e:
-        log(f"USB Init Failed: {e}", error=True)
-        STATUS.set_state("USB_ERR")
-        raise e
     
-    log("Waiting for USB enumeration...")
-    while not usb_kb.is_open():
-        await asyncio.sleep(1)
-        # log(".", end="") # Don't spam log file
-    log("\nUSB Keyboard Ready")
-    STATUS.set_state("READY")
-    
-    def ps2_callback(scancode, pressed, extended):
-        # print(f"PS2: {hex(scancode)} {pressed}")
-        key_tuple = (scancode, extended)
+        log("Waiting for USB enumeration...")
+        while not usb_kb.is_open():
+            await asyncio.sleep(1)
+            # log(".", end="") # Don't spam log file
+        log("\nUSB Keyboard Ready")
+        STATUS.set_state("READY")
         
-        # Debug Windows Keys specifically
-        if scancode in [0x1F, 0x27]:
-            log(f"WIN KEY: {hex(scancode)} Ext:{extended} Pressed:{pressed}", error=True)
+        def ps2_callback(scancode, pressed, extended):
+            # print(f"PS2: {hex(scancode)} {pressed}")
+            key_tuple = (scancode, extended)
+            
+            # Debug Windows Keys specifically
+            if scancode in [0x1F, 0x27]:
+                log(f"WIN KEY: {hex(scancode)} Ext:{extended} Pressed:{pressed}", error=True)
 
-        action = KEY_MAP.get(key_tuple)
-        if action:
-            try:
-                usb_kb.update_key(action, pressed)
-            except Exception as e:
-                log(f"Update Key Error: {e}", error=True)
-                STATUS.set_state("USB_ERR")
-        else:
-            log(f"Unknown: {hex(scancode)} Ext:{extended}", error=True)
-            STATUS.trigger_error("PS2_ERR")
+            action = KEY_MAP.get(key_tuple)
+            if action:
+                try:
+                    usb_kb.update_key(action, pressed)
+                except Exception as e:
+                    log(f"Update Key Error: {e}", error=True)
+                    STATUS.set_state("USB_ERR")
+            else:
+                log(f"Unknown: {hex(scancode)} Ext:{extended}", error=True)
+                STATUS.trigger_error("PS2_ERR")
 
-    log("Initializing PS/2...")
-    ps2_kb = PS2Keyboard(clk_pin=PS2_CLK_PIN, data_pin=PS2_DATA_PIN, callback=ps2_callback)
-    ps2_task = asyncio.create_task(ps2_kb.read_loop())
-    
-    log("Main loop running")
-    while True:
-        if ps2_task.done():
-            log("PS/2 Loop Died! Restarting...", error=True)
+        log("Initializing PS/2...")
+        ps2_kb = PS2Keyboard(clk_pin=PS2_CLK_PIN, data_pin=PS2_DATA_PIN, callback=ps2_callback)
+        ps2_task = asyncio.create_task(ps2_kb.read_loop())
+        
+        log("Main loop running")
+        while True:
+            if ps2_task.done():
+                log("PS/2 Loop Died! Restarting...", error=True)
+                try:
+                    exc = ps2_task.exception()
+                    if exc: log(f"PS/2 Crash: {exc}", error=True)
+                except: pass
+                ps2_task = asyncio.create_task(ps2_kb.read_loop())
+            await asyncio.sleep(1)
+            
+    except Exception as e:
+        log(f"Main Error: {e}", error=True)
+        STATUS.set_state("USB_ERR")
+        if usb_kb:
             try:
-                exc = ps2_task.exception()
-                if exc: log(f"PS/2 Crash: {exc}", error=True)
-            except: pass
-            ps2_task = asyncio.create_task(ps2_kb.read_loop())
-        await asyncio.sleep(1)
+                log("Clearing USB keys due to error...")
+                usb_kb.send_keys([])
+            except:
+                pass
+        raise e
 
 if __name__ == "__main__":
     log("Waiting 2 seconds before starting USB... Press Ctrl+C to stop.")
