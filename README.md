@@ -74,7 +74,7 @@ A robust PS/2 to USB HID keyboard converter for the Raspberry Pi Pico (RP2040), 
 
 All keys are read correctly from the PS/2 keyboard.
 
-Not working with HID right now: Left and Right GUI/Windows/Meta keys, ISO 105th key (next to left shift). This means these keys cannot be used for macro or USB HID input now.
+Not working with HID right now: F13-F24 extended function keys. These are great for macro use in apps that support them, as they cannot be accessed from most keyboards.
 
 **I accept any help and suggestions.**
 
