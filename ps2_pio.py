@@ -157,8 +157,8 @@ class PS2Keyboard:
                 else: self.pause_state = 0
             elif self.pause_state == 5:
                 if sc == 0x77:
-                    # Second 77 -> Ignore
-                    pass
+                    # Second 77 -> Trigger Release
+                    if self.callback: self.callback(0x77, False, True)
                 self.pause_state = 0
             return
 
