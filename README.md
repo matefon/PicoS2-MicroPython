@@ -88,7 +88,7 @@ This is a MicroPython HID limitation. In `micropython-lib/micropython/usb/usb-de
 How to fix:
 - Close Thonny
 - Install `mpy-cross` and `mpremote` with `pip` or `pipx`: `pipx install mpy-cross mpremote`
-- *Optional, recommended*: Download latest `keyboard.py` from `https://github.com/micropython/micropython-lib/blob/master/micropython/usb/usb-device-keyboard/usb/device/keyboard.py` and copy this into the repo `lib` folder
+- *Optional*: Download latest `keyboard.py` from `https://github.com/micropython/micropython-lib/blob/master/micropython/usb/usb-device-keyboard/usb/device/keyboard.py` and copy this into the repo `lib` folder; patch the file: modify `b'\x25\x65'` and `'\x29\x65'` to `b'\x25\x73'` and `b'\x29\x73'` respectively, and add F13-F24 keycodes (104-115)
 - Run this in the repo `lib` folder: `mpy-cross keyboard.py`
 - *Optional*: Save original `keyboard.mpy`: `mpremote cp :lib/usb/device/keyboard.mpy original_keyboard.mpy` (you can revert by re-installing the library, see above)
 - Copy the patched `keyboard.mpy`: `mpremote cp keyboard.mpy :lib/usb/device/keyboard.mpy`
